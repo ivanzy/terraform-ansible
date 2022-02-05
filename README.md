@@ -1,7 +1,19 @@
 # terraform-ansible
 
-Alterar   access_key e secret_key
+Esse repositório contém o código desenvolvido durante o treinamento de Cloud da Grande Porte para criar duas instâncias t2.micro na AWS com IPs públicos. Iremos as utilizar para fazer aprender Ansible. 
 
-Alterar a key_name de cada uma das instâncias
+## Instalação
 
-Linha 179 e 159: alterar para a chave pública de vocês. Se ainda der problema, conecte em cada máquina pela interface da aws e cole a sua chave pública no arquivo .ssh/authorized_keys
+Faça o download do repósitório
+``` console
+$ git clone https://github.com/ivanzy/terraform-ansible 
+$ cd terraform-ansible\
+```
+
+Antes de executar o código - i.e., terraform apply -, altere as seguintes configurações no arquivo terraform.tfvar:
+
+```
+chave_pub = "<sua chave ssh pública>"
+access_key = "<sua chave da aws>"
+secret_key = "<sua chave secreta da aws>"
+```
