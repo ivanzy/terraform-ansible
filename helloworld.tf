@@ -7,17 +7,32 @@ terraform {
   }
 }
 
+variable "chave_pub" {
+  description = "sua chave publica"
+  type        = string
+}
+
+variable "access_key" {
+  description = "id da AWS"
+  type        = string
+}
+variable "secret_key" {
+  description = "chave secreta da AWS"
+  type        = string
+}
+
+
 variable "aws_az" {
   description = "AWS availabity zone"
   type        = string
-  default     = "us-east-1a"
+  default     = "us-east-1c"
 }
 
 
 provider "aws" {
   region     = "us-east-1"
-  #access_key = ""
-  #secret_key = ""
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 resource "aws_vpc" "vpc_aula" {
@@ -148,36 +163,33 @@ resource "aws_instance" "web" {
   ami               = "ami-04505e74c0741db8d"
   instance_type     = "t2.micro"
   availability_zone = var.aws_az
-  key_name          = "aula_terraform"
+  key_name          = "chave-ansible"
   
   network_interface {
     device_index         = 0
     network_interface_id = aws_network_interface.interface.id
   }
-  user_data = <<-EOF
-		            #! /bin/bash
-		            sudo bash -c 'echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEulq2FkYdcmjt0UuyFNhcmQtz57k83nl1sUhDkTvdHb ansible_chave"  > .ssh/authorized_keys'
-	            EOF
 
   tags = {
     Name = "web_server"
   }
 }
 
+resource "aws_key_pair" "ssh-key" {
+  key_name   = "chave-ansible"
+  public_key = var.chave_pub
+}
+
 resource "aws_instance" "banco" {
   ami               = "ami-04505e74c0741db8d"
   instance_type     = "t2.micro"
   availability_zone = var.aws_az
-  key_name          = "aula_terraform"
+  key_name          = "chave-ansible"
   
   network_interface {
     device_index         = 0
     network_interface_id = aws_network_interface.interface_bd.id
   }
-  user_data = <<-EOF
-		            #! /bin/bash
-		            sudo bash -c 'echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEulq2FkYdcmjt0UuyFNhcmQtz57k83nl1sUhDkTvdHb ansible_chave"  > .ssh/authorized_keys'
-	            EOF
 
   tags = {
     Name = "banco_de_dados"
