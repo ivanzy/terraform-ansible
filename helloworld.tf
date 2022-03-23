@@ -20,14 +20,11 @@ variable "secret_key" {
   description = "chave secreta da AWS"
   type        = string
 }
-
-
 variable "aws_az" {
   description = "AWS availabity zone"
   type        = string
   default     = "us-east-1c"
 }
-
 
 provider "aws" {
   region     = "us-east-1"
@@ -81,7 +78,7 @@ resource "aws_route_table_association" "associacao" {
 
 resource "aws_security_group" "abrir_portas" {
   name        = "abrir_portas"
-  description = "Abrir portas para aula BRQ - Grande Porte"
+  description = "Abrir portas para aula - Grande Porte"
   vpc_id      = aws_vpc.vpc_aula.id
 
   ingress {
@@ -171,7 +168,7 @@ resource "aws_instance" "web" {
   }
 
   tags = {
-    Name = "web_server"
+    Name = "luffy"
   }
 }
 
@@ -192,6 +189,6 @@ resource "aws_instance" "banco" {
   }
 
   tags = {
-    Name = "banco_de_dados"
+    Name = "AbelFerreira"
   }
 }

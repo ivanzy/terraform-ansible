@@ -1,6 +1,6 @@
 # Terraform-Ansible - Infraestrutura como Código
 
-Esse repositório contém o código desenvolvido durante o treinamento de Cloud da Grande Porte para criar duas instâncias t2.micro na AWS com IPs públicos. Iremos as utilizar para fazer aprender Ansible. 
+Esse repositório contém o código desenvolvido durante o treinamento da Grande Porte para criar duas instâncias t2.micro na AWS com IPs públicos. Iremos as utilizar para fazer aprender Ansible. 
 
 ## Execução
 
